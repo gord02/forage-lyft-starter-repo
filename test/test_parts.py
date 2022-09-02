@@ -11,6 +11,9 @@ from engine import capuletEngine
 from engine import sternmanEngine
 from engine import willoughbyEngine
 
+from tire import carriganTire
+from tire import octoprimeTire
+
 
 class TestCapuletEngine(unittest.TestCase):
     
@@ -75,9 +78,29 @@ class TestSpindlerBattery(unittest.TestCase):
         
     def test_needs_serivce(self):
         today = datetime.today().date()
-        last_service_date = today.replace(year=today.year - 2)
+        last_service_date = today.replace(year=today.year - 3)
         test_battery = spindlerBattery.SpindlerBattery(last_service_date, today)
         self.assertTrue(test_battery.needs_service())
+        
+class TestCarriganTire(unittest.TestCase): 
+
+    def test_does_not_need_service(self):
+        tires = carriganTire.CarriganTire([0.1, 0.7, 0.5,0.85])
+        self.assertFalse(tires.needs_service())
+
+    def test_needs_service(self):
+        tires = carriganTire.CarriganTire([1, 0.7, 0.5,1])
+        self.assertTrue(tires.needs_service())
+
+class TestOctoprimeTire(unittest.TestCase):
+    
+    def test_does_not_need_service(self):
+        tires = octoprimeTire.OctoprimeTire([0.2, 0.3, 0.5,0.3])
+        self.assertFalse(tires.needs_service())
+        
+    def test_needs_service(self):
+        tires = octoprimeTire.OctoprimeTire([1, 0.7, 0.5,1])
+        self.assertTrue(tires.needs_service())
         
 if __name__ == '__main__':
     unittest.main(verbosity=2)

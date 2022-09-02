@@ -1,12 +1,12 @@
-from engine import Engine
+from engine.engineModel import EngineModel
 
-class SternmanEngine(Engine):
+class SternmanEngine(EngineModel):
     
-    def __init__(self, warning_light_on: bool) -> None:
+    def __init__(self, warning_light_on: bool):
         self.warning_light_on = warning_light_on
     
-    def needs_service(self) -> bool: 
-        if self.warning_light_is_on:
+    def needs_service(self): 
+        if self.warning_light_on:
                 return True
         else:
             return False
